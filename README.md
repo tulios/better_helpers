@@ -1,6 +1,6 @@
 # BetterHelpers
 
-TODO: Write a gem description
+It is a better way to organize and maintain your Rails helpers. It's provide a simple pattern to keep your helpers scoped, avoiding conflicts in the global namespace.
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+BetterHelpers is magic free, it does nothing if you do not want. It is 100% compatible with your old helpers and will only activate under your command.
+
+The usage is very simple, add the module **BetterHelpers::Base** in your helper module and create the methods inside the "DSL" **better_helpers**, like:
 
 ```ruby
 module ProfileHelper
@@ -26,13 +28,51 @@ module ProfileHelper
 
   better_helpers do
 
-    def profile_1
-      link_to("A", "#").html_safe
+    def username string
+      link_to(string, "/username/#{string}")
     end
 
   end
 end
 ```
+
+It will create the namespace *profile_helper* based on the underscore name of module, to use in your views is as simple as:
+
+```html
+<%= profile_helper.username "name" %>
+```
+
+It also work with modules, consider the example:
+
+```ruby
+module Admin
+  module Users
+    module ProfileHelper
+      include BetterHelpers::Base
+
+      better_helpers do
+
+        def username string
+          "admin #{string}"
+        end
+
+      end
+    end
+  end
+end
+```
+
+```html
+<%= admin.users.profile_helper.username "name" %>
+```
+
+By default, it will create the whole hierarchy but it is possible to define the namespace, check the section **Defining the namespace** to understand how to proceed.
+
+BetterHelpers will include into in the namespace just the methods inside the "DSL", you could keep your "old fashion" helpers inside the module without problems.
+
+### Defining the namespace
+
+Just pass a symbol to the "DSL" and it's done.
 
 ```ruby
 module HomeHelper
@@ -40,7 +80,7 @@ module HomeHelper
 
   better_helpers :custom_namespace do
 
-    def home_1
+    def title
       "<h1>HOME</h1>".html_safe
     end
 
@@ -49,8 +89,26 @@ end
 ```
 
 ```html
-<%= profile_helper.profile_1 %>
-<%= custom_namespace.home_1 %>
+<%= custom_namespace.title %>
+```
+
+```ruby
+module MyModule
+  module MyHelper
+    include BetterHelpers::Base
+
+    better_helpers :custom do
+
+      def helper_method
+      end
+
+    end
+  end
+end
+```
+
+```html
+<%= custom.helper_method %>
 ```
 
 ## Contributing

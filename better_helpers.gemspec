@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version       = BetterHelpers::VERSION
   s.authors       = ["tulios"]
   s.email         = ["ornelas.tulio@gmail.com"]
-  s.description   = %q{TODO: Write a gem description}
-  s.summary       = %q{TODO: Write a gem summary}
+  s.description   = %q{It is a better way to organize and maintain your Rails helpers. It's provide a simple pattern to keep your helpers scoped, avoiding conflicts in the global namespace}
+  s.summary       = %q{It is a better way to organize and maintain your Rails helpers}
   s.homepage      = "https://github.com/tulios/better_helpers"
   s.license       = "MIT"
 
