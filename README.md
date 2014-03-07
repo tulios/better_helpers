@@ -1,5 +1,7 @@
 # BetterHelpers
 
+[![Gem Version](https://badge.fury.io/rb/better_helpers.png)](http://badge.fury.io/rb/better_helpers)
+
 It is a better way to organize and maintain your Rails helpers. It's provide a simple pattern to keep your helpers scoped, avoiding conflicts in the global namespace.
 
 ## Installation
