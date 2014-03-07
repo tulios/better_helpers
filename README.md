@@ -38,7 +38,7 @@ end
 
 It will create the namespace *profile_helper* based on the underscore name of module, to use in your views is as simple as:
 
-```html
+```sh
 <%= profile_helper.username "name" %>
 ```
 
@@ -62,13 +62,13 @@ module Admin
 end
 ```
 
-```html
+```sh
 <%= admin.users.profile_helper.username "name" %>
 ```
 
 By default, it will create the whole hierarchy but it is possible to define the namespace, check the section **Defining the namespace** to understand how to proceed.
 
-BetterHelpers will include into in the namespace just the methods inside the "DSL", you could keep your "old fashion" helpers inside the module without problems.
+BetterHelpers will include in the namespace just the methods inside the "DSL", you could keep your "old fashion" helpers inside the module without problems.
 
 ### Defining the namespace
 
@@ -88,7 +88,7 @@ module HomeHelper
 end
 ```
 
-```html
+```sh
 <%= custom_namespace.title %>
 ```
 
@@ -107,7 +107,7 @@ module MyModule
 end
 ```
 
-```html
+```sh
 <%= custom.helper_method %>
 ```
 
