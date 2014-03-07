@@ -20,6 +20,39 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+```ruby
+module ProfileHelper
+  include BetterHelpers::Base
+
+  better_helpers do
+
+    def profile_1
+      link_to("A", "#").html_safe
+    end
+
+  end
+end
+```
+
+```ruby
+module HomeHelper
+  include BetterHelpers::Base
+
+  better_helpers :custom_namespace do
+
+    def home_1
+      "<h1>HOME</h1>".html_safe
+    end
+
+  end
+end
+```
+
+```html
+<%= profile_helper.profile_1 %>
+<%= custom_namespace.home_1 %>
+```
+
 ## Contributing
 
 1. Fork it
