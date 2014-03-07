@@ -16,9 +16,13 @@ module BetterHelpers
         end
 
         namespace ||= self.to_s.underscore
-        self.send(:define_method, namespace) do
-          helper_class.new
-        end
+        names = namespace.to_s.split("/")
+        name = names.shift
+
+        hash = NamespaceToHash.new(helper_class, names).perform
+        value = HashToObject.new(hash).perform
+
+        self.send(:define_method, name) { value }
       end
     end
 
