@@ -1,4 +1,3 @@
-require "ostruct"
 require "active_support/core_ext/string/inflections"
 require "action_view"
 
