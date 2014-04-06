@@ -56,6 +56,28 @@ describe BetterHelpers::Base do
         helpers.custom_helper.helper_method.should eql "test4"
       end
     end
+
+    context "for helpers sharing a module" do
+      let :helpers do
+        Module.new do
+          extend InsideModuleHelper::A::B
+          extend InsideModuleHelper::A::C
+        end
+      end
+
+      it "should include both helpers in the same module" do
+        helpers.should respond_to :inside_module_helper
+        helpers.inside_module_helper.should respond_to :a
+        helpers.inside_module_helper.a.should respond_to :b
+        helpers.inside_module_helper.a.should respond_to :c
+
+        helpers.inside_module_helper.a.b.should respond_to :helper_method
+        helpers.inside_module_helper.a.c.should respond_to :helper_method
+
+        helpers.inside_module_helper.a.b.helper_method.should eql "test3"
+        helpers.inside_module_helper.a.c.helper_method.should eql "test6"
+      end
+    end
   end
 
 end
