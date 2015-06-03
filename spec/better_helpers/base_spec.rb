@@ -17,14 +17,14 @@ describe BetterHelpers::Base do
   end
 
   it "should not conflict with old helpers" do
-    helpers.should respond_to :global_helper_method
-    helpers.global_helper_method.should eql "test5"
+    expect(helpers).to respond_to :global_helper_method
+    expect(helpers.global_helper_method).to eql "test5"
   end
 
   describe "when included" do
     it "should include the class method 'better_helpers'" do
-      SomeHelper.should respond_to :better_helpers
-      AnotherHelper.should respond_to :better_helpers
+      expect(SomeHelper).to respond_to :better_helpers
+      expect(AnotherHelper).to respond_to :better_helpers
     end
   end
 
@@ -35,29 +35,29 @@ describe BetterHelpers::Base do
 
     describe "without arguments" do
       it "should include the helper methods into a 'namespace' with the underscore name of the module" do
-        helpers.should respond_to SomeHelper.to_s.underscore
-        helpers.some_helper.helper_method.should eql "test"
+        expect(helpers).to respond_to SomeHelper.to_s.underscore
+        expect(helpers.some_helper.helper_method).to eql "test"
       end
     end
 
     describe "with namespace argument" do
       it "should include the helper methods into the defined 'namespace'" do
-        helpers.should respond_to :another
-        helpers.another.helper_method.should eql "test2"
+        expect(helpers).to respond_to :another
+        expect(helpers.another.helper_method).to eql "test2"
       end
     end
 
     context "for helpers inside modules" do
       it "should include as cascade methods" do
-        helpers.should respond_to :inside_module_helper
-        helpers.inside_module_helper.should respond_to :a
-        helpers.inside_module_helper.a.should respond_to :b
-        helpers.inside_module_helper.a.b.helper_method.should eql "test3"
+        expect(helpers).to respond_to :inside_module_helper
+        expect(helpers.inside_module_helper).to respond_to :a
+        expect(helpers.inside_module_helper.a).to respond_to :b
+        expect(helpers.inside_module_helper.a.b.helper_method).to eql "test3"
       end
 
       it "should allow namespace configuration" do
-        helpers.should respond_to :custom_helper
-        helpers.custom_helper.helper_method.should eql "test4"
+        expect(helpers).to respond_to :custom_helper
+        expect(helpers.custom_helper.helper_method).to eql "test4"
       end
     end
 
@@ -70,16 +70,16 @@ describe BetterHelpers::Base do
       end
 
       it "should include both helpers in the same module" do
-        helpers.should respond_to :inside_module_helper
-        helpers.inside_module_helper.should respond_to :a
-        helpers.inside_module_helper.a.should respond_to :b
-        helpers.inside_module_helper.a.should respond_to :c
+        expect(helpers).to respond_to :inside_module_helper
+        expect(helpers.inside_module_helper).to respond_to :a
+        expect(helpers.inside_module_helper.a).to respond_to :b
+        expect(helpers.inside_module_helper.a).to respond_to :c
 
-        helpers.inside_module_helper.a.b.should respond_to :helper_method
-        helpers.inside_module_helper.a.c.should respond_to :helper_method
+        expect(helpers.inside_module_helper.a.b).to respond_to :helper_method
+        expect(helpers.inside_module_helper.a.c).to respond_to :helper_method
 
-        helpers.inside_module_helper.a.b.helper_method.should eql "test3"
-        helpers.inside_module_helper.a.c.helper_method.should eql "test6"
+        expect(helpers.inside_module_helper.a.b.helper_method).to eql "test3"
+        expect(helpers.inside_module_helper.a.c.helper_method).to eql "test6"
       end
     end
   end

@@ -22,19 +22,19 @@ describe BetterHelpers::HashHierarchyToClass do
 
       it "should include the methods into the parent class" do
         apply
-        subject.should respond_to :a
-        subject.should_not respond_to :b
-        subject.should_not respond_to :c
+        expect(subject).to respond_to :a
+        expect(subject).not_to respond_to :b
+        expect(subject).not_to respond_to :c
 
-        subject.a.should respond_to :b
-        subject.a.should_not respond_to :a
-        subject.a.should_not respond_to :c
+        expect(subject.a).to respond_to :b
+        expect(subject.a).not_to respond_to :a
+        expect(subject.a).not_to respond_to :c
 
-        subject.a.b.should respond_to :c
-        subject.a.b.should_not respond_to :a
-        subject.a.b.should_not respond_to :b
+        expect(subject.a.b).to respond_to :c
+        expect(subject.a.b).not_to respond_to :a
+        expect(subject.a.b).not_to respond_to :b
 
-        subject.a.b.c.should eql 1
+        expect(subject.a.b.c).to eql 1
       end
 
       it "should allow new instances with the same methods" do
@@ -43,19 +43,19 @@ describe BetterHelpers::HashHierarchyToClass do
         instance3 = parent_class.new
 
         [instance2, instance3].each do |instance|
-          instance.should respond_to :a
-          instance.should_not respond_to :b
-          instance.should_not respond_to :c
+          expect(instance).to respond_to :a
+          expect(instance).not_to respond_to :b
+          expect(instance).not_to respond_to :c
 
-          instance.a.should respond_to :b
-          instance.a.should_not respond_to :a
-          instance.a.should_not respond_to :c
+          expect(instance.a).to respond_to :b
+          expect(instance.a).not_to respond_to :a
+          expect(instance.a).not_to respond_to :c
 
-          instance.a.b.should respond_to :c
-          instance.a.b.should_not respond_to :a
-          instance.a.b.should_not respond_to :b
+          expect(instance.a.b).to respond_to :c
+          expect(instance.a.b).not_to respond_to :a
+          expect(instance.a.b).not_to respond_to :b
 
-          instance.a.b.c.should eql 1
+          expect(instance.a.b.c).to eql 1
         end
       end
     end
@@ -75,29 +75,29 @@ describe BetterHelpers::HashHierarchyToClass do
       end
 
       it "should define the method in the parent class" do
-        subject.should respond_to :a
-        subject.should_not respond_to :b
-        subject.should_not respond_to :c
-        subject.should_not respond_to :d
+        expect(subject).to respond_to :a
+        expect(subject).not_to respond_to :b
+        expect(subject).not_to respond_to :c
+        expect(subject).not_to respond_to :d
 
-        subject.a.should respond_to :b
-        subject.a.should respond_to :c
-        subject.a.should_not respond_to :a
-        subject.a.should_not respond_to :d
+        expect(subject.a).to respond_to :b
+        expect(subject.a).to respond_to :c
+        expect(subject.a).not_to respond_to :a
+        expect(subject.a).not_to respond_to :d
 
-        subject.a.b.should respond_to :d
-        subject.a.b.should_not respond_to :a
-        subject.a.b.should_not respond_to :b
-        subject.a.b.should_not respond_to :c
+        expect(subject.a.b).to respond_to :d
+        expect(subject.a.b).not_to respond_to :a
+        expect(subject.a.b).not_to respond_to :b
+        expect(subject.a.b).not_to respond_to :c
 
-        subject.a.b.d.should eql 1
+        expect(subject.a.b.d).to eql 1
 
-        subject.a.c.should respond_to :d
-        subject.a.c.should_not respond_to :a
-        subject.a.c.should_not respond_to :b
-        subject.a.c.should_not respond_to :c
+        expect(subject.a.c).to respond_to :d
+        expect(subject.a.c).not_to respond_to :a
+        expect(subject.a.c).not_to respond_to :b
+        expect(subject.a.c).not_to respond_to :c
 
-        subject.a.c.d.should eql 2
+        expect(subject.a.c.d).to eql 2
       end
     end
   end
@@ -111,7 +111,7 @@ describe BetterHelpers::HashHierarchyToClass do
       end
 
       it "should return the value" do
-        subject.should eql 1
+        expect(subject).to eql 1
       end
     end
 
@@ -121,9 +121,9 @@ describe BetterHelpers::HashHierarchyToClass do
       end
 
       it "should return an instance of a callable object" do
-        subject.should respond_to :a
-        subject.a.should respond_to :b
-        subject.a.b.should eql 1
+        expect(subject).to respond_to :a
+        expect(subject.a).to respond_to :b
+        expect(subject.a.b).to eql 1
       end
     end
   end

@@ -11,15 +11,15 @@ describe BetterHelpers::NamespaceToHash do
   end
 
   it "should generate a nested hash resulting in the given object" do
-    subject.should be_an_instance_of Hash
-    subject.keys.should eql ["a"]
+    expect(subject).to be_an_instance_of Hash
+    expect(subject.keys).to eql ["a"]
 
-    subject["a"].should be_an_instance_of Hash
-    subject["a"].keys.should eql ["b"]
+    expect(subject["a"]).to be_an_instance_of Hash
+    expect(subject["a"].keys).to eql ["b"]
 
-    subject["a"]["b"].should be_an_instance_of Hash
-    subject["a"]["b"].keys.should eql ["c"]
-    subject["a"]["b"]["c"].should be_an_instance_of String
+    expect(subject["a"]["b"]).to be_an_instance_of Hash
+    expect(subject["a"]["b"].keys).to eql ["c"]
+    expect(subject["a"]["b"]["c"]).to be_an_instance_of String
   end
 
 end
