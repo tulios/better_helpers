@@ -29,6 +29,10 @@ describe BetterHelpers::Base do
   end
 
   describe "::better_helpers" do
+    it "includes the module 'BetterHelpers::Railties::RequestContext'" do
+      expect(helpers.another.class.ancestors).to include BetterHelpers::Railties::RequestContext
+    end
+
     describe "without arguments" do
       it "should include the helper methods into a 'namespace' with the underscore name of the module" do
         helpers.should respond_to SomeHelper.to_s.underscore

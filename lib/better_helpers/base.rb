@@ -13,10 +13,7 @@ module BetterHelpers
       def better_helpers namespace = nil, &block
         helper_class = Class.new(&block)
         helper_class.class_eval do
-          include ActionView::Helpers
-          include ActionView::Context
-          extend ActionView::Helpers
-          extend ActionView::Context
+          include BetterHelpers::Railties::RequestContext
         end
 
         namespace ||= self.to_s.underscore
